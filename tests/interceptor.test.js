@@ -337,7 +337,7 @@ test('do not intercept request', async (t) => {
         interceptDomains: ['example.com'],
         idpTokenUrl: `http://localhost:${tokenServer.address().port}`,
         clientId: 'client-id',
-        urls: [`localhost:${server.address().port}`]
+        urls: [`http://localhost:${server.address().port}`]
       })]
     }
   })
@@ -380,14 +380,13 @@ test('request is intercepted', async (t) => {
         refreshToken,
         idpTokenUrl: `http://localhost:${tokenServer.address().port}`,
         clientId: 'client-id',
-        urls: [`localhost:${server.address().port}`]
+        urls: [`http://localhost:${server.address().port}`]
       })]
     }
   })
 
   const { statusCode } = await request(`http://localhost:${server.address().port}`, {
     dispatcher,
-    headers: { authorization: `Bearer ${accessToken}` }
   })
   assert.strictEqual(statusCode, 200)
 })
